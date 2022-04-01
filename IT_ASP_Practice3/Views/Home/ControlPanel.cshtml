@@ -3,5 +3,47 @@
     ViewBag.Title = "ControlPanel";
 }
 
-<h2>ControlPanel</h2>
+<html>
+    <head>
+        <title>ControlPanel</title>
+    </head>
+    <body>
+        <div class="conteiner">
+
+            @using (Html.BeginForm("ActionCustomer", "Home", FormMethod.Post))
+            {
+                <h1>Customers</h1>
+                <div class="conteiner__wrap">
+                    <button name="action" value="view">View</button>
+                    <button name="action" value="add">Add</button>
+                    <button name="action" value="update">Update</button>
+                    <button name="action" value="delete">Delete</button>
+                </div>
+            }
+
+
+            @using (Html.BeginForm("ActionOrders", "Home", FormMethod.Post))
+            {
+                <h1>Orders</h1>
+                <div class="conteiner__wrap">
+                    <button name="action" value="view">View</button>
+                    <button name="action" value="add">Add</button>
+                    <button name="action" value="update">Update</button>
+                    <button name="action" value="delete">Delete</button>
+                </div>
+            }
+
+            @using (Html.BeginForm("ActionProducts", "Home", FormMethod.Post))
+            {
+                <h1>Products</h1>
+                <div class="conteiner__wrap">
+                    <button name="action" value="view">View</button>
+                    <button name="action" value="add">Add</button>
+                    <button name="action" value="update">Update</button>
+                    <button name="action" value="delete">Delete</button>
+                </div>
+            }
+        </div>
+    </body>
+</html>
 
