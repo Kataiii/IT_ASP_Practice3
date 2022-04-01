@@ -9,6 +9,5 @@ namespace IT_ASP_Practice3.Models
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public string Email { get; set; }
     }
 }
