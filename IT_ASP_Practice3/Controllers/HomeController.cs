@@ -116,6 +116,18 @@ namespace IT_ASP_Practice3.Controllers
                     db.Entry(customer).State = EntityState.Modified;
                     db.SaveChanges();
                     break;
+                case "delete":
+                    if (Request.Form["id_user_delete"] == null || Request.Form["id_user_delete"] == "")
+                    {
+                        return HttpNotFound();
+                    }
+                    Customer customer_del = db.Customers.Find(int.Parse(Request.Form["id_user_delete"]));
+                    if (customer_del != null)
+                    {
+                        db.Customers.Remove(customer_del);
+                        db.SaveChanges();
+                    }
+                    break;
             }
             return View("ControlPanel", db.Customers);
          }

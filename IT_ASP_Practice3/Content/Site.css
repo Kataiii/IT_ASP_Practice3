@@ -60,3 +60,8 @@ button {
     display: none;
     margin-bottom: 2%;
 }
+
+#panel_delete {
+    display: none;
+    margin-bottom: 2%;
+}

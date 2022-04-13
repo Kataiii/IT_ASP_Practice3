@@ -1,8 +1,6 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "ControlPanel";
 }
-
 
 <html>
 <head>
@@ -11,13 +9,13 @@
 <body>
     <div class="conteiner">
         <h1>Customers</h1>
-        @*@using (Html.BeginForm("ActionCustomer", "Home", FormMethod.Post))*@
-        @*{*@
+
         <div class="conteiner__wrap">
             <button id="button_add">Add</button>
-            <button id="button_update" >Update</button>
-            <button name="action" value="delete">Delete</button>
+            <button id="button_update">Update</button>
+            <button id="button_delete">Delete</button>
         </div>
+
         <div id="panel_add">
             <p>Enter the name of the new user:</p>
             @using (Html.BeginForm("ActionCustomer", "Home", FormMethod.Post))
@@ -36,7 +34,16 @@
                 <button name="action" value="update">Update customer</button>
             }
         </div>
-        @*}*@
+
+        <div id="panel_delete">
+            <p>Enter the ID of the customer you want to delete:</p>
+            @using (Html.BeginForm("ActionCustomer", "Home", FormMethod.Post))
+            {
+                <input type="text" class="text__field" id="id_user_delete" name="id_user_delete" placeholder="Id" />
+                <button name="action" value="delete">Delete customer</button>
+            }
+        </div>
+
         @using (Html.BeginForm("Check_RadioButton", "Home", FormMethod.Get))
         {
             <div class="conteiner__wrap">
