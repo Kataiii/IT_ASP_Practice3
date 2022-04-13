@@ -1,0 +1,38 @@
+﻿@model IEnumerable<IT_ASP_Practice3.Models.Customer_with_orders>
+
+    <table class="table" id="customers_with_orders_ul">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.orderId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.customerName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.productName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.productCost)
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.orderId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.customerName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.productName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.productCost)
+                </td>
+            </tr>
+        }
+
+    </table>
+

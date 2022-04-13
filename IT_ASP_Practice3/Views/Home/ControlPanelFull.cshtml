@@ -1,0 +1,60 @@
+﻿
+@{
+    ViewBag.Title = "ControlPanelFull";
+}
+
+<html>
+<head>
+    <title>ControlPanel</title>
+</head>
+<body>
+    <div class="conteiner">
+        <h1>Customers</h1>
+        @using (Html.BeginForm("ActionCustomer", "Home", FormMethod.Post))
+        {
+            <div class="conteiner__wrap">
+                <button name="action" value="add">Add</button>
+                <button name="action" value="update">Update</button>
+                <button name="action" value="delete">Delete</button>
+            </div>
+        }
+        @using (Html.BeginForm("Check_RadioButton", "Home", FormMethod.Get))
+        {
+            <div class="conteiner__wrap">
+                <div class="conteiner__wrap__radiobutton">
+                    @Html.RadioButton("customer", "not_orders")
+                    <span>Customers</span> <br />
+                </div>
+                <div class="conteiner__wrap__radiobutton">
+                    @Html.RadioButton("customer", "with_orders", true)
+                    <span>Customers with orders</span> <br />
+                </div>
+                <button>Show</button>
+            </div>
+        }
+
+        @Html.Partial("Customers_with_orders")
+
+        @*@using (Html.BeginForm("ActionOrders", "Home", FormMethod.Post))
+            {
+                <h1>Orders</h1>
+                <div class="conteiner__wrap">
+                    <button name="action" value="add">Add</button>
+                    <button name="action" value="update">Update</button>
+                    <button name="action" value="delete">Delete</button>
+                </div>
+            }
+
+            @using (Html.BeginForm("ActionProducts", "Home", FormMethod.Post))
+            {
+                <h1>Products</h1>
+                <div class="conteiner__wrap">
+                    <button name="action" value="add">Add</button>
+                    <button name="action" value="update">Update</button>
+                    <button name="action" value="delete">Delete</button>
+                </div>
+            }*@
+    </div>
+</body>
+</html>
+
