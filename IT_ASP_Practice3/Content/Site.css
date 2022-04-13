@@ -70,3 +70,13 @@ button {
     display: none;
     margin-bottom: 2%;
 }
+
+#panel_delete_product {
+    display: none;
+    margin-bottom: 2%;
+}
+
+#panel_update_product {
+    display: none;
+    margin-bottom: 2%;
+}

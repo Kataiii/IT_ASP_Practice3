@@ -16,8 +16,6 @@ namespace IT_ASP_Practice3.Controllers
         public ActionResult ControlPanel()
         {
             var database = db;
-            /*ViewBag.Customers = db.Customers;
-            ViewBag.Products = db.Products;*/
             return View(database);
         }
 
@@ -37,7 +35,7 @@ namespace IT_ASP_Practice3.Controllers
             return View(db.Orders);
         }
 
-        public ActionResult Customers_with_orders()
+        private IQueryable<Customer_with_orders> SelectCustomersWithrders()
         {
             var customers_With_Orders = from o in db.Orders
                                         join c in db.Customers on o.CustomerId equals c.Id into temp1
@@ -51,8 +49,13 @@ namespace IT_ASP_Practice3.Controllers
                                             productName = t2.Name,
                                             productCost = t2.Cost
                                         };
+            return customers_With_Orders;
+        }
+
+        public ActionResult Customers_with_orders()
+        {
             OrderContextFull orderContextFull = new OrderContextFull();
-            orderContextFull.customer_With_Orders = customers_With_Orders;
+            orderContextFull.customer_With_Orders = SelectCustomersWithrders();
             orderContextFull.Products = db.Products;
             return View(orderContextFull);
 
@@ -60,45 +63,107 @@ namespace IT_ASP_Practice3.Controllers
 
         public ActionResult ControlPanelFull()
         {
-            var customers_With_Orders = from o in db.Orders
-                                        join c in db.Customers on o.CustomerId equals c.Id into temp1
-                                        from t1 in temp1.DefaultIfEmpty()
-                                        join p in db.Products on o.ProductId equals p.Id into temp2
-                                        from t2 in temp2.DefaultIfEmpty()
-                                        select new Customer_with_orders
-                                        {
-                                            orderId = o.Id,
-                                            customerName = t1.Name,
-                                            productName = t2.Name,
-                                            productCost = t2.Cost
-                                        };
             OrderContextFull orderContextFull = new OrderContextFull();
-            orderContextFull.customer_With_Orders = customers_With_Orders;
+            orderContextFull.customer_With_Orders = SelectCustomersWithrders();
             orderContextFull.Products = db.Products;
             return View(orderContextFull);
         }
 
         public ActionResult Check_RadioButton(string customer)
         {
-            if (customer == "not_orders") return View("ControlPanel",db.Customers);
-            var customers_With_Orders = from o in db.Orders
-                                        join c in db.Customers on o.CustomerId equals c.Id into temp1
-                                        from t1 in temp1.DefaultIfEmpty()
-                                        join p in db.Products on o.ProductId equals p.Id into temp2
-                                        from t2 in temp2.DefaultIfEmpty()
-                                        select new Customer_with_orders
-                                        {
-                                            orderId = o.Id,
-                                            customerName = t1.Name,
-                                            productName = t2.Name,
-                                            productCost = t2.Cost
-                                        };
+            if (customer == "not_orders") return View("ControlPanel",db);
             OrderContextFull orderContextFull = new OrderContextFull();
-            orderContextFull.customer_With_Orders = customers_With_Orders;
+            orderContextFull.customer_With_Orders = SelectCustomersWithrders();
             orderContextFull.Products = db.Products;
             return View("ControlPanelFull", orderContextFull);
         }
 
+        //Database Queries
+        //Customers
+        private void AddCustomer(string name)
+        {
+            var newCustomer = new Customer
+            {
+                Id = 1,
+                Name = name
+            };
+            db.Customers.Add(newCustomer);
+            db.SaveChanges();
+        }
+
+        private bool UpdateCustomer(string id, string name)
+        {
+            if (id == null || id == "")
+            {
+                return false;
+            }
+            Customer customer = db.Customers.Find(int.Parse(id));
+            customer.Name = name;
+            db.Entry(customer).State = EntityState.Modified;
+            db.SaveChanges();
+            return true;
+        }
+
+        private bool DeleteCustomer(string id)
+        {
+            if (id == null || id == "")
+            {
+                return false;
+            }
+            Customer customer_del = db.Customers.Find(int.Parse(id));
+            if (customer_del != null)
+            {
+                db.Customers.Remove(customer_del);
+                db.SaveChanges();
+                return true;
+            }
+            return false;
+        }
+
+        //Products
+        private void AddProduct(string name,string cost)
+        {
+            var newProduct = new Product
+            {
+                Id = 1,
+                Name = name,
+                Cost = int.Parse(cost)
+            };
+            db.Products.Add(newProduct);
+            db.SaveChanges();
+        }
+
+        private bool UpdateProduct(string id, string name, string cost)
+        {
+            if (id == null || id == "")
+            {
+                return false;
+            }
+            Product product = db.Products.Find(int.Parse(id));
+            if (name!="") product.Name = name;
+            if (cost != "") product.Cost = int.Parse(cost);
+            db.Entry(product).State = EntityState.Modified;
+            db.SaveChanges();
+            return true;
+        }
+
+        private bool DeleteProduct(string id)
+        {
+            if (id == null || id == "")
+            {
+                return false;
+            }
+            Product product_del = db.Products.Find(int.Parse(id));
+            if (product_del != null)
+            {
+                db.Products.Remove(product_del);
+                db.SaveChanges();
+                return true;
+            }
+            return false;
+        }
+
+        //Orders
 
         //Controllers for Customers
         [HttpPost]
@@ -107,35 +172,13 @@ namespace IT_ASP_Practice3.Controllers
             switch (action)
             {
                 case "add":
-                    var newCustomer = new Customer
-                    {
-                        Id = 1,
-                        Name = Request.Form["new_user_name"]
-                    };
-                    db.Customers.Add(newCustomer);
-                    db.SaveChanges();
+                    AddCustomer(Request.Form["new_user_name"]);
                     break;
                 case "update":
-                    if(Request.Form["id_user_update"]==null|| Request.Form["id_user_update"] == "")
-                    {
-                        return HttpNotFound();
-                    }
-                    Customer customer = db.Customers.Find(int.Parse(Request.Form["id_user_update"]));
-                    customer.Name = Request.Form["name_user_update"];
-                    db.Entry(customer).State = EntityState.Modified;
-                    db.SaveChanges();
+                    if (!UpdateCustomer(Request.Form["id_user_update"], Request.Form["name_user_update"])) return HttpNotFound();
                     break;
                 case "delete":
-                    if (Request.Form["id_user_delete"] == null || Request.Form["id_user_delete"] == "")
-                    {
-                        return HttpNotFound();
-                    }
-                    Customer customer_del = db.Customers.Find(int.Parse(Request.Form["id_user_delete"]));
-                    if (customer_del != null)
-                    {
-                        db.Customers.Remove(customer_del);
-                        db.SaveChanges();
-                    }
+                    if (!DeleteCustomer(Request.Form["id_user_delete"])) return HttpNotFound();
                     break;
             }
             return View("ControlPanel", db);
@@ -147,51 +190,17 @@ namespace IT_ASP_Practice3.Controllers
             switch (action)
             {
                 case "add":
-                    var newCustomer = new Customer
-                    {
-                        Id = 1,
-                        Name = Request.Form["new_user_name"]
-                    };
-                    db.Customers.Add(newCustomer);
-                    db.SaveChanges();
+                    AddCustomer(Request.Form["new_user_name"]);
                     break;
                 case "update":
-                    if (Request.Form["id_user_update"] == null || Request.Form["id_user_update"] == "")
-                    {
-                        return HttpNotFound();
-                    }
-                    Customer customer = db.Customers.Find(int.Parse(Request.Form["id_user_update"]));
-                    customer.Name = Request.Form["name_user_update"];
-                    db.Entry(customer).State = EntityState.Modified;
-                    db.SaveChanges();
+                    if (!UpdateCustomer(Request.Form["id_user_update"], Request.Form["name_user_update"])) return HttpNotFound();
                     break;
                 case "delete":
-                    if (Request.Form["id_user_delete"] == null || Request.Form["id_user_delete"] == "")
-                    {
-                        return HttpNotFound();
-                    }
-                    Customer customer_del = db.Customers.Find(int.Parse(Request.Form["id_user_delete"]));
-                    if (customer_del != null)
-                    {
-                        db.Customers.Remove(customer_del);
-                        db.SaveChanges();
-                    }
+                    if (!DeleteCustomer(Request.Form["id_user_delete"])) return HttpNotFound();
                     break;
             }
-            var customers_With_Orders = from o in db.Orders
-                                        join c in db.Customers on o.CustomerId equals c.Id into temp1
-                                        from t1 in temp1.DefaultIfEmpty()
-                                        join p in db.Products on o.ProductId equals p.Id into temp2
-                                        from t2 in temp2.DefaultIfEmpty()
-                                        select new Customer_with_orders
-                                        {
-                                            orderId = o.Id,
-                                            customerName = t1.Name,
-                                            productName = t2.Name,
-                                            productCost = t2.Cost
-                                        };
             OrderContextFull orderContextFull = new OrderContextFull();
-            orderContextFull.customer_With_Orders = customers_With_Orders;
+            orderContextFull.customer_With_Orders = SelectCustomersWithrders();
             orderContextFull.Products = db.Products;
             return View("ControlPanelFull", orderContextFull);
         }
@@ -209,18 +218,48 @@ namespace IT_ASP_Practice3.Controllers
             switch (action)
             {
                 case "add":
-                    var newProduct = new Product
+                    AddProduct(Request.Form["new_product_name"], Request.Form["new_product_cost"]);
+                    break;
+                case "update":
+                    if (!UpdateProduct(Request.Form["id_product_update"], 
+                                        Request.Form["update_product_name"], 
+                                        Request.Form["update_product_cost"]))
                     {
-                        Id = 1,
-                        Name = Request.Form["new_product_name"],
-                        Cost = int.Parse(Request.Form["new_product_cost"])
-                    };
-                    db.Products.Add(newProduct);
-                    db.SaveChanges();
+                        return HttpNotFound();
+                    }
+                    break;
+                case "delete":
+                    if(!DeleteProduct(Request.Form["id_product_delete"])) return HttpNotFound();
                     break;
             }
 
             return View("ControlPanel", db);
+        }
+
+        [HttpPost]
+        public ActionResult ActionProductsFull(string action)
+        {
+            switch (action)
+            {
+                case "add":
+                    AddProduct(Request.Form["new_product_name"], Request.Form["new_product_cost"]);
+                    break;
+                case "update":
+                    if (!UpdateProduct(Request.Form["id_product_update"],
+                                        Request.Form["update_product_name"],
+                                        Request.Form["update_product_cost"]))
+                    {
+                        return HttpNotFound();
+                    }
+                    break;
+                case "delete":
+                    if (!DeleteProduct(Request.Form["id_product_delete"])) return HttpNotFound();
+                    break;
+            }
+            OrderContextFull orderContextFull = new OrderContextFull();
+            orderContextFull.customer_With_Orders = SelectCustomersWithrders();
+            orderContextFull.Products = db.Products;
+            return View("ControlPanelFull", orderContextFull);
         }
     }
 }

@@ -84,6 +84,26 @@
             }
         </div>
 
+        <div id="panel_update_product">
+            <p>Enter the ID of the customer you want to change and a new name and a new cost (if you don't want to change the name or cost, leave the corresponding field empty):</p>
+            @using (Html.BeginForm("ActionProducts", "Home", FormMethod.Post))
+            {
+                <input type="text" class="text__field" id="id_product_update" name="id_product_update" placeholder="Id" />
+                <input type="text" class="text__field" id="update_product_name" name="update_product_name" placeholder="Name" />
+                <input type="text" class="text__field" id="update_product_cost" name="update_product_cost" placeholder="Cost" />
+                <button name="action" value="update">Update product</button>
+            }
+        </div>
+
+        <div id="panel_delete_product">
+            <p>Enter the ID of the product you want to delete:</p>
+            @using (Html.BeginForm("ActionProducts", "Home", FormMethod.Post))
+            {
+                <input type="text" class="text__field" id="id_product_delete" name="id_product_delete" placeholder="Id" />
+                <button name="action" value="delete">Delete product</button>
+            }
+        </div>
+
         @Html.Partial("Products", @Model.Products)
         @*@using (Html.BeginForm("ActionOrders", "Home", FormMethod.Post))
         {
