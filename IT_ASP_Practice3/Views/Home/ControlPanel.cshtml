@@ -1,4 +1,6 @@
-﻿@{
+﻿@model IT_ASP_Practice3.Models.OrderContext
+
+@{
     ViewBag.Title = "ControlPanel";
 }
 
@@ -59,21 +61,33 @@
             </div>
         }
 
-        @Html.Partial("Customers")
+        @Html.Partial("Customers", @Model.Customers)
 
+
+        @*Products*@
+
+
+        <h1>Products</h1>
+        <div class="conteiner__wrap">
+            <button id="button_add_product">Add</button>
+            <button id="button_update_product">Update</button>
+            <button id="button_delete_product">Delete</button>
+        </div>
+
+        <div id="panel_add_product">
+            <p>Enter the name and cost of the new product:</p>
+            @using (Html.BeginForm("ActionProducts", "Home", FormMethod.Post))
+            {
+                <input type="text" class="text__field" id="new_product_name" name="new_product_name" placeholder="Name" />
+                <input type="text" class="text__field" id="new_product_cost" name="new_product_cost" placeholder="Cost" />
+                <button name="action" value="add">Add product</button>
+            }
+        </div>
+
+        @Html.Partial("Products", @Model.Products)
         @*@using (Html.BeginForm("ActionOrders", "Home", FormMethod.Post))
         {
             <h1>Orders</h1>
-            <div class="conteiner__wrap">
-                <button name="action" value="add">Add</button>
-                <button name="action" value="update">Update</button>
-                <button name="action" value="delete">Delete</button>
-            </div>
-        }
-
-        @using (Html.BeginForm("ActionProducts", "Home", FormMethod.Post))
-        {
-            <h1>Products</h1>
             <div class="conteiner__wrap">
                 <button name="action" value="add">Add</button>
                 <button name="action" value="update">Update</button>

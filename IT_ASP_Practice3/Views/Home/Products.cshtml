@@ -1,16 +1,17 @@
-﻿@model IEnumerable<IT_ASP_Practice3.Models.Order>
+﻿@model IEnumerable<IT_ASP_Practice3.Models.Product>
 
-<table class="table" id="order_ul">
+<table class="table" id="customers_ul">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.Id)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.CustomerId)
+            @Html.DisplayNameFor(model => model.Name)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.ProductId)
+            @Html.DisplayNameFor(model => model.Cost)
         </th>
+        <th></th>
     </tr>
 
     @foreach (var item in Model)
@@ -20,10 +21,10 @@
                 @Html.DisplayFor(modelItem => item.Id)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.CustomerId)
+                @Html.DisplayFor(modelItem => item.Name)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.ProductId)
+                @Html.DisplayFor(modelItem => item.Cost)
             </td>
         </tr>
     }
