@@ -111,10 +111,10 @@
     </Compile>
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\Customer_with_orders.cs" />
-    <Compile Include="Models\Flag.cs" />
     <Compile Include="Models\Order.cs" />
     <Compile Include="Models\OrderContext.cs" />
     <Compile Include="Models\OrderContextFull.cs" />
+    <Compile Include="Models\OrderContextMain.cs" />
     <Compile Include="Models\Product.cs" />
     <Compile Include="Models\Router.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

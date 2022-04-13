@@ -80,3 +80,18 @@ button {
     display: none;
     margin-bottom: 2%;
 }
+
+#panel_add_order {
+    display: none;
+    margin-bottom: 2%;
+}
+
+#panel_delete_order {
+    display: none;
+    margin-bottom: 2%;
+}
+
+#panel_update_order {
+    display: none;
+    margin-bottom: 2%;
+}

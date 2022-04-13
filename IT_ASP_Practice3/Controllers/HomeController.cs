@@ -15,8 +15,12 @@ namespace IT_ASP_Practice3.Controllers
         // GET: Home
         public ActionResult ControlPanel()
         {
-            var database = db;
-            return View(database);
+            OrderContextMain orderContextMain = new OrderContextMain();
+            orderContextMain.Customers = db.Customers;
+            orderContextMain.customer_With_Orders = SelectCustomersWithrders();
+            orderContextMain.Orders = db.Orders;
+            orderContextMain.Products = db.Products;
+            return View(orderContextMain);
         }
 
         [HttpGet]
@@ -71,7 +75,15 @@ namespace IT_ASP_Practice3.Controllers
 
         public ActionResult Check_RadioButton(string customer)
         {
-            if (customer == "not_orders") return View("ControlPanel",db);
+            if (customer == "not_orders")
+            {
+                OrderContextMain orderContextMain = new OrderContextMain();
+                orderContextMain.Customers = db.Customers;
+                orderContextMain.customer_With_Orders = SelectCustomersWithrders();
+                orderContextMain.Orders = db.Orders;
+                orderContextMain.Products = db.Products;
+                return View("ControlPanel", orderContextMain);
+            }
             OrderContextFull orderContextFull = new OrderContextFull();
             orderContextFull.customer_With_Orders = SelectCustomersWithrders();
             orderContextFull.Products = db.Products;
@@ -164,6 +176,48 @@ namespace IT_ASP_Practice3.Controllers
         }
 
         //Orders
+        private void AddOrder(string idCustomer,string idProduct)
+        {
+            var newOrder = new Order
+            {
+                Id = 1,
+                CustomerId = int.Parse(idCustomer),
+                ProductId = int.Parse(idProduct)
+            };
+            db.Orders.Add(newOrder);
+            db.SaveChanges();
+        }
+
+        private bool UpdateOrder(string id, string idCustomer,string idProduct)
+        {
+            if (id == null || id == "")
+            {
+                return false;
+            }
+            Order order = db.Orders.Find(int.Parse(id));
+            if (idCustomer != "") order.CustomerId = int.Parse(idCustomer);
+            if (idProduct != "") order.ProductId = int.Parse(idProduct);
+            db.Entry(order).State = EntityState.Modified;
+            db.SaveChanges();
+            return true;
+        }
+
+        private bool DeleteOrder(string id)
+        {
+            if (id == null || id == "")
+            {
+                return false;
+            }
+            Order order_del = db.Orders.Find(int.Parse(id));
+            if (order_del != null)
+            {
+                db.Orders.Remove(order_del);
+                db.SaveChanges();
+                return true;
+            }
+            return false;
+        }
+
 
         //Controllers for Customers
         [HttpPost]
@@ -181,7 +235,12 @@ namespace IT_ASP_Practice3.Controllers
                     if (!DeleteCustomer(Request.Form["id_user_delete"])) return HttpNotFound();
                     break;
             }
-            return View("ControlPanel", db);
+            OrderContextMain orderContextMain = new OrderContextMain();
+            orderContextMain.Customers = db.Customers;
+            orderContextMain.customer_With_Orders = SelectCustomersWithrders();
+            orderContextMain.Orders = db.Orders;
+            orderContextMain.Products = db.Products;
+            return View("ControlPanel", orderContextMain);
          }
 
         [HttpPost]
@@ -232,8 +291,12 @@ namespace IT_ASP_Practice3.Controllers
                     if(!DeleteProduct(Request.Form["id_product_delete"])) return HttpNotFound();
                     break;
             }
-
-            return View("ControlPanel", db);
+            OrderContextMain orderContextMain = new OrderContextMain();
+            orderContextMain.Customers = db.Customers;
+            orderContextMain.customer_With_Orders = SelectCustomersWithrders();
+            orderContextMain.Orders = db.Orders;
+            orderContextMain.Products = db.Products;
+            return View("ControlPanel", orderContextMain);
         }
 
         [HttpPost]
@@ -254,6 +317,59 @@ namespace IT_ASP_Practice3.Controllers
                     break;
                 case "delete":
                     if (!DeleteProduct(Request.Form["id_product_delete"])) return HttpNotFound();
+                    break;
+            }
+            OrderContextFull orderContextFull = new OrderContextFull();
+            orderContextFull.customer_With_Orders = SelectCustomersWithrders();
+            orderContextFull.Products = db.Products;
+            return View("ControlPanelFull", orderContextFull);
+        }
+
+        //Controllers for orders
+        public ActionResult ActionOrders(string action)
+        {
+            switch (action)
+            {
+                case "add":
+                    AddOrder(Request.Form["new_order_idCustomer"], Request.Form["new_order_idProduct"]);
+                    break;
+                case "update":
+                    if (!UpdateOrder(Request.Form["id_order_update"],
+                                        Request.Form["update_order_idCustomer"],
+                                        Request.Form["update_order_idProduct"]))
+                    {
+                        return HttpNotFound();
+                    }
+                    break;
+                case "delete":
+                    if (!DeleteOrder(Request.Form["id_order_delete"])) return HttpNotFound();
+                    break;
+            }
+            OrderContextMain orderContextMain = new OrderContextMain();
+            orderContextMain.Customers = db.Customers;
+            orderContextMain.customer_With_Orders = SelectCustomersWithrders();
+            orderContextMain.Orders = db.Orders;
+            orderContextMain.Products = db.Products;
+            return View("ControlPanel", orderContextMain);
+        }
+
+        public ActionResult ActionOrdersFull(string action)
+        {
+            switch (action)
+            {
+                case "add":
+                    AddOrder(Request.Form["new_order_idCustomer"], Request.Form["new_order_idProduct"]);
+                    break;
+                case "update":
+                    if (!UpdateOrder(Request.Form["id_order_update"],
+                                        Request.Form["update_order_idCustomer"],
+                                        Request.Form["update_order_idProduct"]))
+                    {
+                        return HttpNotFound();
+                    }
+                    break;
+                case "delete":
+                    if (!DeleteOrder(Request.Form["id_order_delete"])) return HttpNotFound();
                     break;
             }
             OrderContextFull orderContextFull = new OrderContextFull();
