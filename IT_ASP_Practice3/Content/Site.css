@@ -20,11 +20,12 @@ body{
 }
 
 h1 {
-    color: #100F0F;
+    color: #0D49AB;
     font-family: 'Source Code Pro', monospace;
-    font-weight:500;
-    font-size: 2.5vw;
-    margin-bottom:1.5%;
+    font-weight: 500;
+    font-size: 3vw;
+    margin-bottom: 2.5%;
+    border-bottom: solid 2px #0D49AB;
 }
 
 .conteiner__wrap{
@@ -64,9 +65,31 @@ button {
         border: #0D49AB solid 1px;
     }
 
+.secondary_button {
+    font-size: 1.5vw;
+    margin-left: 73%;
+    background-color: #F3F3F3;
+    color: #0D49AB;
+    background-image: linear-gradient(#0D49AB, #0D49AB);
+    background-position: 0% 0%;
+    background-repeat: no-repeat;
+    background-size: 0% 100%;
+    transition: background-size .5s, color .5s;
+}
+
+    .secondary_button:hover {
+        color:#F3F3F3;
+        background-size: 100% 100%;
+        border: #0D49AB solid 1px;
+    }
+
+.conteiner_panel-hidden {
+    margin-bottom: 2%;
+}
+
 #panel_add {
-    display:none;
-    margin-bottom:2%;
+    display: none;
+    margin-bottom: 2%;
 }
 
 #panel_update {
@@ -110,8 +133,8 @@ button {
 }
 
 .text__field {
-    width: 94%;
-    height: 24px;
+    width: 60%;
+    height: 38px;
     margin-bottom: 1%;
     padding-left: 1%;
     font-size: 1.25vw;
@@ -129,7 +152,6 @@ p {
 
 span {
     font-size: 1.25vw;
-    margin-bottom: 1%;
     color: rgba(15,15,15,0.75);
     font-family: 'Source Code Pro', monospace;
     font-weight: 300;
@@ -150,19 +172,28 @@ span {
 
 table {
     width: 100%;
-    margin-bottom: 20px;
-    border: 1px solid #dddddd;
+    margin-bottom: 9%;
+    border: 1px solid rgba(15,15,15,0.75);
     border-collapse: collapse;
 }
 
 th {
-        font-weight: bold;
-        padding: 5px;
-        background: #efefef;
-        border: 1px solid #dddddd;
-    }
+    padding: 5px;
+    background: #0D49AB;
+    font-family: 'Source Code Pro', monospace;
+    font-weight: 600;
+    color: #F3F3F3;
+    border: solid 1px rgba(15,15,15,0.75);
+}
 
 td {
-        border: 1px solid #dddddd;
-        padding: 5px;
-    }
+    padding: 5px;
+    font-family: 'Source Code Pro', monospace;
+    font-weight: 300;
+    color: rgba(15,15,15,0.75);
+    border: solid 1px rgba(15,15,15,0.75);
+}
+
+.radio_button {
+    margin: auto 0;
+}

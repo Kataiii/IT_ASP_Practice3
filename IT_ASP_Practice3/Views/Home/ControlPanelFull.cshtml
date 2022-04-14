@@ -19,31 +19,31 @@
         </div>
 
 
-        <div id="panel_add">
+        <div class="conteiner_panel-hidden" id="panel_add">
             <p>Enter the name of the new user:</p>
             @using (Html.BeginForm("ActionCustomerFull", "Home", FormMethod.Post))
             {
                 <input type="text" class="text__field" id="new_user_name" name="new_user_name" placeholder="Name" />
-                <button name="action" value="add">Add customer</button>
+                <button class="secondary_button" name="action" value="add">Add customer</button>
             }
         </div>
 
-        <div id="panel_update">
+        <div class="conteiner_panel-hidden" id="panel_update">
             <p>Enter the ID of the customer you want to change and a new name:</p>
             @using (Html.BeginForm("ActionCustomerFull", "Home", FormMethod.Post))
             {
                 <input type="text" class="text__field" id="id_user_update" name="id_user_update" placeholder="Id" />
                 <input type="text" class="text__field" id="name_user_update" name="name_user_update" placeholder="New name" />
-                <button name="action" value="update">Update customer</button>
+                <button class="secondary_button" name="action" value="update">Update customer</button>
             }
         </div>
 
-        <div id="panel_delete">
+        <div class="conteiner_panel-hidden" id="panel_delete">
             <p>Enter the ID of the customer you want to delete:</p>
             @using (Html.BeginForm("ActionCustomerFull", "Home", FormMethod.Post))
             {
                 <input type="text" class="text__field" id="id_user_delete" name="id_user_delete" placeholder="Id" />
-                <button name="action" value="delete">Delete customer</button>
+                <button class="secondary_button" name="action" value="delete">Delete customer</button>
             }
         </div>
 
@@ -51,11 +51,11 @@
         {
             <div class="conteiner__wrap">
                 <div class="conteiner__wrap__radiobutton">
-                    @Html.RadioButton("customer", "not_orders")
+                    @Html.RadioButton("customer", "not_orders", new { @class = "radio_button" })
                     <span>Customers</span> <br />
                 </div>
                 <div class="conteiner__wrap__radiobutton">
-                    @Html.RadioButton("customer", "with_orders", true)
+                    @Html.RadioButton("customer", "with_orders", true, new { @class = "radio_button" })
                     <span>Customers with orders</span> <br />
                 </div>
                 <button>Show</button>
@@ -75,33 +75,33 @@
             <button id="button_delete_product">Delete</button>
         </div>
 
-        <div id="panel_add_product">
+        <div class="conteiner_panel-hidden" id="panel_add_product">
             <p>Enter the name and cost of the new product:</p>
             @using (Html.BeginForm("ActionProductsFull", "Home", FormMethod.Post))
             {
                 <input type="text" class="text__field" id="new_product_name" name="new_product_name" placeholder="Name" />
                 <input type="text" class="text__field" id="new_product_cost" name="new_product_cost" placeholder="Cost" />
-                <button name="action" value="add">Add product</button>
+                <button class="secondary_button" name="action" value="add">Add product</button>
             }
         </div>
 
-        <div id="panel_update_product">
+        <div class="conteiner_panel-hidden" id="panel_update_product">
             <p>Enter the ID of the customer you want to change and a new name and a new cost (if you don't want to change the name or cost, leave the corresponding field empty):</p>
             @using (Html.BeginForm("ActionProductsFull", "Home", FormMethod.Post))
             {
                 <input type="text" class="text__field" id="id_product_update" name="id_product_update" placeholder="Id" />
                 <input type="text" class="text__field" id="update_product_name" name="update_product_name" placeholder="Name" />
                 <input type="text" class="text__field" id="update_product_cost" name="update_product_cost" placeholder="Cost" />
-                <button name="action" value="update">Update product</button>
+                <button class="secondary_button" name="action" value="update">Update product</button>
             }
         </div>
 
-        <div id="panel_delete_product">
+        <div class="conteiner_panel-hidden" id="panel_delete_product">
             <p>Enter the ID of the product you want to delete:</p>
             @using (Html.BeginForm("ActionProductsFull", "Home", FormMethod.Post))
             {
                 <input type="text" class="text__field" id="id_product_delete" name="id_product_delete" placeholder="Id" />
-                <button name="action" value="delete">Delete product</button>
+                <button class="secondary_button" name="action" value="delete">Delete product</button>
             }
         </div>
 
@@ -117,33 +117,33 @@
             <button id="button_delete_order">Delete</button>
         </div>
 
-        <div id="panel_add_order">
+        <div class="conteiner_panel-hidden" id="panel_add_order">
             <p>Enter the id of customer and the id of product to new order:</p>
             @using (Html.BeginForm("ActionOrdersFull", "Home", FormMethod.Post))
             {
                 <input type="text" class="text__field" id="new_order_idCustomer" name="new_order_idCustomer" placeholder="Id of customer" />
                 <input type="text" class="text__field" id="new_order_idProduct" name="new_order_idProduct" placeholder="Id of product" />
-                <button name="action" value="add">Add order</button>
+                <button class="secondary_button" name="action" value="add">Add order</button>
             }
         </div>
 
-        <div id="panel_update_order">
+        <div class="conteiner_panel-hidden" id="panel_update_order">
             <p>Enter the ID of the order you want to change and a new id of customer and a new id of product (if you don't want to change the name or cost, leave the corresponding field empty):</p>
             @using (Html.BeginForm("ActionOrdersFull", "Home", FormMethod.Post))
             {
                 <input type="text" class="text__field" id="id_order_update" name="id_order_update" placeholder="Id of order" />
                 <input type="text" class="text__field" id="update_order_idCustomer" name="update_order_idCustomer" placeholder="Id of customer" />
                 <input type="text" class="text__field" id="update_order_idProduct" name="update_order_idProduct" placeholder="Id of product" />
-                <button name="action" value="update">Update order</button>
+                <button class="secondary_button" name="action" value="update">Update order</button>
             }
         </div>
 
-        <div id="panel_delete_order">
+        <div class="conteiner_panel-hidden" id="panel_delete_order">
             <p>Enter the ID of the order you want to delete:</p>
             @using (Html.BeginForm("ActionOrdersFull", "Home", FormMethod.Post))
             {
                 <input type="text" class="text__field" id="id_order_delete" name="id_order_delete" placeholder="Id" />
-                <button name="action" value="delete">Delete order</button>
+                <button class="secondary_button" name="action" value="delete">Delete order</button>
             }
         </div>
 
