@@ -1,0 +1,13 @@
+﻿
+@{
+    ViewBag.Title = "ViewError";
+}
+
+<div>
+    @using (Html.BeginForm("TryAgain", "Home", FormMethod.Get))
+    {
+        <img style="display:block; margin: 10% auto 5%" src="~/Resourses/Error.svg" />
+        <p style="font-weight:600; text-align:center">Oops... It seems we don't have such data, try again</p>
+        <button style="display: block; width: 15%; margin: 2% auto; font-size: 1.8vw;">Try againg</button>
+    }
+</div>
