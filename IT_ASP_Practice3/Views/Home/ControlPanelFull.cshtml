@@ -49,7 +49,7 @@
 
         @using (Html.BeginForm("Check_RadioButton", "Home", FormMethod.Get))
         {
-            <div class="conteiner__wrap">
+            <div class="conteiner__wrap_checkbutton">
                 <div class="conteiner__wrap__radiobutton">
                     @Html.RadioButton("customer", "not_orders", new { @class = "radio_button" })
                     <span>Customers</span> <br />
@@ -58,7 +58,7 @@
                     @Html.RadioButton("customer", "with_orders", true, new { @class = "radio_button" })
                     <span>Customers with orders</span> <br />
                 </div>
-                <button>Show</button>
+                <button id="show">Show</button>
             </div>
         }
 

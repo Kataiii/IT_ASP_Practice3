@@ -73,6 +73,7 @@ namespace IT_ASP_Practice3.Controllers
             return View(orderContextFull);
         }
 
+        [OutputCache (Duration =30, Location =System.Web.UI.OutputCacheLocation.Client)]
         public ActionResult Check_RadioButton(string customer)
         {
             if (customer == "not_orders")
@@ -224,7 +225,7 @@ namespace IT_ASP_Practice3.Controllers
 
         //Controllers for Customers
         [HttpPost]
-         public ActionResult ActionCustomer(string action)
+        public ActionResult ActionCustomer(string action)
          {
             switch (action)
             {
@@ -245,6 +246,7 @@ namespace IT_ASP_Practice3.Controllers
             orderContextMain.Products = db.Products;
             return View("ControlPanel", orderContextMain);
          }
+
 
         [HttpPost]
         public ActionResult ActionCustomerFull(string action)
@@ -355,6 +357,7 @@ namespace IT_ASP_Practice3.Controllers
             orderContextMain.Products = db.Products;
             return View("ControlPanel", orderContextMain);
         }
+
 
         public ActionResult ActionOrdersFull(string action)
         {
