@@ -1,0 +1,54 @@
+﻿@*@model Practice6.Models.PeopleContext*@
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<html>
+    <head>
+        <title>Index</title>
+    </head>
+    <body>
+        <div class="conteiner">
+            <button id="db" name="db">Data from the database</button>
+            <button id="cashe" name="cashe">Data from the cashe</button>
+
+            <div id="div__table">
+
+            </div>
+            @* @Html.Partial("People"@*, @Model.People)*@
+        </div>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+        <script>
+            var url = '@Url.Action("People", "db")';
+            var url1 = '@Url.Action("People", "cashe")';
+            let flag_db = false;
+            let flag_cash = false;
+
+            console.log("Hello world");
+
+            $('#db').click(function () {
+                if (flag_db == false) {
+                    $('#div__table').show();
+                    flag_db = true;
+                    $('#div__table').load("/Home/People", { type: "db" });
+                } else {
+                    $('#div__table').hide();
+                    flag_db = false;
+                }
+                
+            })
+
+            document.getElementById("cashe").onclick = function () {
+                if (flag_cash == false) {
+                    $('#div__table').show();
+                    flag_cash = true;
+                    $('#div__table').load("/Home/People", { type: "cashe" });
+                } else {
+                    $('#div__table').hide();
+                    flag_cash = false;
+                }
+            }
+        </script>
+    </body>
+</html>

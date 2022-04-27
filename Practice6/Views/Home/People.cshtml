@@ -1,0 +1,35 @@
+﻿@model IEnumerable<Practice6.Models.Person>
+
+<table class="table" id="customers_ul">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Firstname)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Secondname)
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        if(item!=null)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Firstname)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Secondname)
+                </td>
+            </tr>
+         }
+        
+    }
+
+</table>
