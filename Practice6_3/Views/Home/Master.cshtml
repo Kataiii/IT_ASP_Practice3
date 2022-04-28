@@ -7,9 +7,12 @@
     <head>
     </head>
     <body>
-        <h1>Master</h1>
-        @using(Html.BeginForm("Router_pages", "Home", FormMethod.Post)){
-        <button id="first_page" name="nextPage" value="first_page">Next page</button>
-        }
+        <div class="conteiner__header">
+            <h1>Master</h1>
+            @using (Html.BeginForm("Router_pages", "Home", FormMethod.Post))
+            {
+                <button id="first_page" name="nextPage" value="first_page">Next page</button>
+            }
+        </div>
     </body>
 </html>

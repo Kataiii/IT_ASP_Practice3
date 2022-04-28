@@ -4,8 +4,63 @@
     box-sizing:border-box;
 }
 
+body{
+    background-color:#F3F3F3;
+}
+
+div{
+    margin:2% 0;
+}
 
 /*TO DO: styles for pages*/
-.conteiner{
+.conteiner {
+    width: 60%;
+    margin: 3% auto;
+    padding:2%;
+    background-color: #F3F3F3;
+    box-shadow: 0px 0px 19px 6px rgba(16, 15, 15, 0.25);
+}
 
+.conteiner__header{
+    width:90%;
+    margin:1% auto;
+    display:flex;
+    justify-content:space-between;
+}
+
+h1 {
+    display:block;
+    font-family: Caveat Brush;
+    font-size: 36px;
+    line-height: 45px;
+}
+
+button {
+    height: 36px;
+    width: 175px;
+    border-radius: 14px;
+    background: #FFC204;
+    border: 1px solid #363636;
+    box-shadow: 0px 0px 3px 1px #FFC20440;
+    font-family: 'Caveat';
+    font-size: 24px;
+    line-height: 30px;
+    text-align: center;
+    color: #363636;
+    transition-property: background-color;
+    transition-duration: 0.5s;
+}
+
+    button:hover {
+        background: #F3F0E8;
+        box-shadow:none;
+    }
+
+text {
+    font-family: 'Caveat';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 30px;
+    color: rgba(54, 54, 54, 0.8);
 }

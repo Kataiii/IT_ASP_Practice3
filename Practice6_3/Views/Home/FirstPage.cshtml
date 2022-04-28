@@ -4,29 +4,33 @@
 }
 
 <html>
-<head>
-</head>
-<body>
-    <h1>First page</h1>
-    @section Placeholder1 {
-        <div>
-            <text>
-                Hello
-            </text>
+    <head>
+    </head>
+    <body>
+        <div class="conteiner__header">
+            <h1>First page</h1>
+            @using (Html.BeginForm("Router_pages", "Home", FormMethod.Post))
+            {
+                <button id="second_page" name="nextPage" value="second_page">Next page</button>
+            }
         </div>
-    }
+        
+        @section Placeholder1 {
+            <div>
+                <text>
+                    Hello
+                </text>
+            </div>
+        }
 
-    @section Placeholder2 {
-        <div>
-            <text>
-                It's a magic
-            </text>
-        </div>
-    }
+        @section Placeholder2 {
+            <div>
+                <text>
+                    It's a magic
+                </text>
+            </div>
+        }
 
-    @using (Html.BeginForm("Router_pages", "Home", FormMethod.Post))
-    {
-        <button id="second_page" name="nextPage" value="second_page">Next page</button>
-    }
-</body>
+
+    </body>
 </html>
