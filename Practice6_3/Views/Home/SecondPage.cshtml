@@ -1,0 +1,24 @@
+﻿
+@{
+    ViewBag.Title = "SecondPage";
+}
+
+<html>
+<head>
+</head>
+<body>
+    <h1>Second page</h1>
+    @section Placeholder2 {
+        <div>
+            <text>
+                It's a trap
+            </text>
+        </div>
+    }
+
+    @using (Html.BeginForm("Router_pages", "Home", FormMethod.Post))
+    {
+        <button id="main" name="nextPage" value="main">Next page</button>
+    }
+</body>
+</html>
