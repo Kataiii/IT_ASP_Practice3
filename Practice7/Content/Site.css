@@ -1,0 +1,54 @@
+﻿*{
+    padding:0;
+    margin:0;
+    box-sizing:border-box;
+}
+
+body{
+    background-color:#F3F3F3;
+}
+
+.div__img {
+    width: 50%;
+    margin: 1% auto;
+    box-shadow: 0px 0px 32px 3px rgba(0, 0, 0, 0.25);
+}
+
+#img__party{
+    width:100%;
+}
+
+h1 {
+    font-family: 'Permanent Marker';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 64px;
+    text-align: center;
+    color: #FFC204;
+    -webkit-text-stroke: 1px #0A0A0A;
+    text-shadow:3px 2px 0px #DC7F31, 3px 3px 4px rgba(0, 0, 0, 0.25);
+}
+
+button {
+    width: 15%;
+    display: block;
+    margin: 1% auto;
+    background: #FFC20459;
+    border: 2px solid #0A0A0A;
+    border-radius: 46px;
+    font-family: 'Permanent Marker';
+    font-size: 36px;
+    text-align: center;
+    color: #36363659;
+    -webkit-text-stroke: 1px #0A0A0A;
+    text-shadow: 3px 2px 0px #DC7F31, 3px 3px 4px rgba(0, 0, 0, 0.25);
+    transition-property:all;
+    transition-duration: 0.4s;
+}
+
+    button:hover {
+        background: #FFC204;
+        color: #363636;
+    }
+
+

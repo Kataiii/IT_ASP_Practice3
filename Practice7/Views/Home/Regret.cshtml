@@ -1,0 +1,23 @@
+﻿
+@{
+    ViewBag.Title = "Regret";
+}
+
+<html>
+<head>
+    <link href="~/Content/Answer.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+    <div class="div__img">
+        <img id="img__party" src="~/Resorses/sad.svg" />
+    </div>
+    <h1>
+        Sad, we hope to see you next time
+    </h1>
+    @using (Html.BeginForm("Router_pages", "Home", FormMethod.Post))
+    {
+        <button name="page" value="form">Add one person</button>
+        <button name="page" value="show">Show guests</button>
+    }
+</body>
+</html>

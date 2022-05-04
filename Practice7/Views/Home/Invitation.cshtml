@@ -1,0 +1,20 @@
+﻿
+@{
+    ViewBag.Title = "Invitation";
+}
+<html>
+    <head>
+
+    </head>
+    <body>
+        <div class="div__img">
+            <img id="img__party" src="~/Resorses/party.svg" />
+        </div>
+        <h1>
+            It's time to have a party!
+        </h1>
+        @using (Html.BeginForm("Router_pages", "Home", FormMethod.Post)) { 
+            <button name="page" value="form">Continue</button>
+        }
+    </body>
+</html>

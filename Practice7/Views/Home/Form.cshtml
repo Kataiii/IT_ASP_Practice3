@@ -1,0 +1,36 @@
+﻿@model Practice7.Models.PersonResponse
+
+@{
+    ViewBag.Title = "Form";
+}
+
+<html>
+    <head>
+        <link href="~/Content/Form.css" rel="stylesheet" type="text/css"/>
+    </head>
+    <body>
+        <div class="container">
+            <h1>Form</h1>
+            @using (Html.BeginForm("Form", "Home", FormMethod.Post))
+            {
+                <div>
+                    <p id="notCorrect" style="color:orangered">@ViewBag.NotCorrect</p>
+                </div>
+
+                <p>Your name:</p>
+                @Html.TextBoxFor(x => x.Name, new { @class = "input_form", @placeholder = "Name", @id = "user_name" })
+
+                <p>Your phone number:</p>
+                @Html.TextBoxFor(x => x.Phone, new { @class = "input_form", @placeholder = "+7(XXX)-XXX-XX-XX", @id = "user_phone", @maxlength = "17" })
+
+                <p>Are you coming to the party?</p>
+                <p>@Html.RadioButtonFor(x => x.Answer, "True", new { Checked = "checked" })Yes</p>
+                <p>@Html.RadioButtonFor(x => x.Answer, "False")No</p>
+
+                <button id="send_answer" name="page" value="send">Send</button>
+            }
+
+        </div>
+        <script src="~/Scripts/Form.js"></script>
+    </body>
+</html>

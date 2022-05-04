@@ -1,0 +1,22 @@
+﻿
+@{
+    ViewBag.Title = "Welcome";
+}
+<html>
+<head>
+    <link href="~/Content/Answer.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+    <div class="div__img">
+        <img id="img__party" src="~/Resorses/happy.svg" />
+    </div>
+    <h1>
+        That's great! We are waiting for you, the drinks are already in the fridge!
+    </h1>
+    @using (Html.BeginForm("Router_pages", "Home", FormMethod.Post))
+    {
+        <button name="page" value="form">Add one person</button>
+        <button name="page" value="show">Show guests</button>
+    }
+</body>
+</html>
