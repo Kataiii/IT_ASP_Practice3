@@ -199,8 +199,11 @@ namespace IT_ASP_Practice3.Controllers
             }
             Order order = db.Orders.Find(int.Parse(id));
             if (order == null) return false;
+            if (idCustomer != ""&&db.Customers.Find(int.Parse(idCustomer)) == null) return false;
+            if (idProduct != ""&&db.Products.Find(int.Parse(idProduct)) == null) return false;
             if (idCustomer != "") order.CustomerId = int.Parse(idCustomer);
             if (idProduct != "") order.ProductId = int.Parse(idProduct);
+            
             db.Entry(order).State = EntityState.Modified;
             db.SaveChanges();
             return true;

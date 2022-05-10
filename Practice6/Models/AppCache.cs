@@ -39,7 +39,7 @@ namespace Practice6.Models
             MemoryCache memoryCache = MemoryCache.Default;
             foreach(Person person in people)
             {
-                memoryCache.Add(person.Id.ToString(), person, DateTime.Now.AddMinutes(10));
+                memoryCache.Add(person.Id.ToString(), person, DateTime.Now.AddMinutes(1));
             }
             return true;
         }
